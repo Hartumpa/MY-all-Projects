@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart Page</title>
+    <style>
+        body{
+           background-color: rbg(235,235,235);
+           font-family: 'Poppins', sans-serif;
+        }
+        h1{
+            text-align: center;
+        }
+        #container{
+            display: flex;
+            width: 90%;
+            margin: auto;
+            /* border: 1px solid black; */
+        }
+        #cartDisplay{
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 10px;
+            background-color: white;
+            width: 60%;
+            padding: 20px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            justify-content: space-between;
+        }
+
+        
+        button{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            font-weight: bold;
+            font-size: larger;
+            margin: 0 5px 0 5px;
+            cursor: pointer;
+        }
+        input{
+            width: 40px;
+        }
+        #priceDetails{
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            width: 30%;
+            height: 80vh;
+            position: sticky;
+            top: 5px;
+            padding: 10px;
+            margin: 0  auto auto auto;
+            font-size: 1.2vw;
+
+
+        }
+        #priceDetails>div:nth-child(1){
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          justify-content: space-between;
+          margin: 10px;
+        }
+        #signOutBtn{
+          cursor: pointer;
+          width: 60px;
+          height: 30px;
+          border-radius: 5px;
+          font-weight: 100;
+          font-size: 14px;
+        }
+        #signinStatus,#username{
+          color: green;
+          margin: 10px;
+        }
+        .delBtn{
+          cursor: pointer;
+          width: 60px;
+          height: 30px;
+          border-radius: 5px;
+          font-weight: 100;
+          font-size: 14px;
+        }
+        #display{
+          display: grid;
+          grid-template-columns: 1fr;
+          line-height: 0;
+          padding: 15px;
+        }
+        #display>div{
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          justify-content: space-between;
+          /* padding: 0 20px; */
+          margin: -1px;
+        }
+        #placeOrder{
+          border: 1px solid black;
+          padding: 10px;
+          text-align: center;
+          margin: 20px auto;
+          width: 40%;
+          background-color: green;
+          color: white;
+          cursor: pointer;
+
+        }
+        #coupan{
+          width: 40%;
+          text-align: center;
+        }
+        #applyC{
+        color: green;
+        cursor: pointer;
+        }
+        #sPrice{
+          text-decoration: line-through;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="navCart">
+      <h1>Masai Cart</h1>
+      <h2 id="loginDisplay"></h2>
+  </div>
+  <div id="container">
+      <div id="cartDisplay">
+      
+      </div>
+
+      <div id="priceDetails">
+        <div>
+          <div id="signinStatus"></div>
+
+          <div id="username"></div>
+        <!-- <div id="signOutBtn">SignOut</div> -->
+        <button id="signOutBtn">signOut</button>
+        </div>
+        <div id="display">
+            <div> <p>Striked Price: &#8377</p><p id="sPrice"></p></div>
+            <div><p>Price: &#8377</p><p id="price"></p></div>
+            <div><p>Items: </p><p id="items"></p></div>
+            <div><p>Save:</p><p id="save"></p></div>
+            <div><p id="applyC">Apply Coupon:</p><input id="coupan" type="text"></div>
+            <h4><hr></h4>
+            <div><p>Total: &#8377</p><h4 id="totCart"></h4></div>
+            
+        </div>
+        <div><p id="placeOrder">Place Order</p></div>
+        
+      </div>
+  
+
+  </div>
+  </body>
+</html>
+<script>
+  let cartData= JSON.parse(localStorage.getItem("cart-page")) || [];
+  let status=JSON.parse(localStorage.getItem("status"))||[];
+
+  if(status.length>0){
+          document.querySelector("#signinStatus").innerText="Logged in!";
+          document.querySelector("#username").innerText="welcome"+" "+status[1];
+        }
+        
+      let ItemCount=JSON.parse(localStorage.getItem("Item"))||[];
+      cartDisplay(cartData);
+
+      function cartDisplay(cartData){
+        totalCart();
+        document.querySelector("#cartDisplay").innerHTML="";
+
+        cartData=JSON.parse(localStorage.getItem("cart-page"))||[];
+
+        if(status.length==0){
+          alert("SignIn First!");
+          window.location.href="signin.html";
+        }else if(cartData.length==0){
+      let emptyImg=document.createElement("img");
+      emptyImg.setAttribute("src","https://rukminim1.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90");
+      emptyImg.style.width="50%";
+
+      let emptyMsg1=document.createElement("h2");
+      let emptyMsg2=document.createElement("p");
+      emptyMsg1.innerText="Your cart is empty!";
+      emptyMsg2.innerText="It's a good day to buy the items!";
+      let emptyDisp= document.querySelector("#cartDisplay");
+      emptyImg.style.margin="auto";
+      emptyMsg1.style.margin="auto";
+      emptyMsg2.style.margin="auto";
+      emptyDisp.append(emptyImg,emptyMsg1,emptyMsg2);
+      emptyDisp.style.display="flex";
+      emptyDisp.style.flexDirection="column";
+  
+   
+     
+    }else{
+    
+   
+    cartData.forEach(function(element,index){
+       
+        let img=document.createElement("img");
+        let name=document.createElement("h4");
+        let price=document.createElement("h3");
+        let stikdPrice=document.createElement("p");
+        let off=document.createElement("h4");
+        let child1=document.createElement("div");
+        let child2=document.createElement("div");
+        let child3=document.createElement("div");
+        let child4=document.createElement("div");
+        let remBtn=document.createElement("button");
+        let addBtn=document.createElement("button");
+        let inptCart=document.createElement("h2");
+        let delBtn=document.createElement("button");
+        delBtn.setAttribute("class","delBtn");
+        delBtn.innerText="Delete";
+      
+      
+       
+
+        img.setAttribute("src",element.image_url);
+        name.innerText=element.name;
+        price.innerText= element.price;
+        stikdPrice.innerText=element.strikedoffprice;
+        let disPercent=((1-element.price/element.strikedoffprice)*100);
+        disPercent= disPercent.toFixed(2);
+        off.innerText=(disPercent+ "% Off");
+        remBtn.innerText="-";
+        addBtn.innerText="+";
+        inptCart.style.margin="0px 10px";
+        inptCart.style.border="2px solid black";
+        inptCart.style.padding="5px"
+       
+      
+
+        inptCart.setAttribute("type","number");
+        child1.style.display="flex";
+        delBtn.style.backgroundColor="red";
+        stikdPrice.style.textDecoration="line-through";
+        inptCart.innerText=element.count;
+       
+        child3.style.margin="auto"
+        child1.append(remBtn,inptCart,addBtn);
+        child2.append(img,child1);
+        child3.append(name,stikdPrice,price,off,delBtn);
+        document.querySelector("#cartDisplay").append(child2,child3);
+
+       
+        remBtn.addEventListener("click", function(){
+            cartRemove(element,index,inptCart);
+          
+        });
+
+       
+        addBtn.addEventListener("click", function(){
+            cartAdd(element,index,inptCart);
+          
+        });
+
+        delBtn.addEventListener("click",function(){
+            delCart(element,index);
+        });
+
+      
+    });
+    
+  };
+}; 
+
+
+document.querySelector("#signOutBtn").addEventListener("click",funSignOut);
+
+
+
+function  cartRemove(element,index,inptCart){
+  if(inptCart.innerText>1){
+  inptCart.innerText--;
+  element.count=inptCart.innerText;
+  cartData.splice(index,1,element);
+  localStorage.setItem("cart-page",JSON.stringify(cartData));
+  totalCart();
+  }
+};
+
+function  cartAdd(element,index,inptCart){
+  console.log(inptCart)
+  inptCart.innerText++;
+  element.count=inptCart.innerText;
+  
+  cartData.splice(index,1,element);
+  localStorage.setItem("cart-page",JSON.stringify(cartData));
+  totalCart();
+};
+
+function delCart(element,index){
+    // alert(index);
+    // console.log(cartData)
+  cartData.splice(index,1);
+  
+    localStorage.setItem("cart-page",JSON.stringify(cartData));
+    cartDisplay(cartData);
+    
+}
+
+function funSignOut(){
+
+  status=[];
+  localStorage.setItem("status", JSON.stringify(status));
+alert("Sign Out Successful!");
+window.location.href="signin.html";
+}
+
+
+
+
+
+
+
+  function totalCart(){
+    stdPrice=0;
+    total=0;
+    save=0;
+    cartData.forEach(function(ele){
+      total=total+(+ele.price*+ele.count);
+      stdPrice=stdPrice+ele.strikedoffprice*+ele.count;
+      save=((1-total/stdPrice)*100).toFixed(2)+"%"
+    });
+
+
+    document.querySelector("#sPrice").innerText=stdPrice;
+    document.querySelector("#price").innerText=total;
+    document.querySelector("#items").innerText=cartData.length;
+    document.querySelector("#totCart").innerText=total;
+      
+   
+    document.querySelector("#save").innerText=save;
+  
+    let coupan="",temp=0;
+document.querySelector("#applyC").addEventListener("click",function(){
+      coupan=document.querySelector("#coupan").value;
+     if(coupan=="masai30"){
+      temp=(total*0.7).toFixed(2);
+        document.querySelector("#totCart").innerText=temp; 
+      }
+    });
+
+
+
+    
+    document.querySelector("#placeOrder").addEventListener("click",function(){
+      if (coupan=="masai30") {
+        localStorage.setItem("total",JSON.stringify(+temp));
+        window.location.href="order.html";
+      }else{
+        localStorage.setItem("total",JSON.stringify(total));
+        window.location.href="order.html";
+      }
+    });
+     
+  
+    
+  }
+</script>

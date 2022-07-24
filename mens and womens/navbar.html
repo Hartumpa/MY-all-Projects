@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navbar</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        list-style: none;
+        text-decoration: none;
+      }
+      #navbar {
+        width: 95%;
+        margin: auto;
+        display: flex;
+        background-color: black;
+        color: white;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 50px;
+        border-radius: 20px;
+        font-family: "Poppins", sans-serif;
+      }
+      #navbar > div:last-child {
+        display: flex;
+        color: white;
+        width: 40%;
+        justify-content: space-around;
+      }
+      h2 {
+        cursor: pointer;
+      }
+      a {
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="navbar">
+      <div>
+        <h2><a href="navbar.html"> Reebok</a></h2>
+      </div>
+      <div>
+        <h2 id="men">Men</h2>
+        <h2 id="women">Women</h2>
+        <h2>
+          <a href="signin.html">Sign in</a>
+        </h2>
+        <h2>
+          <a href="signup.html">Sign up</a>
+        </h2>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script src="navbar.js"></script>

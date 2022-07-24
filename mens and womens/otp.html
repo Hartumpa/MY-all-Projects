@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP</title>
+    <style>
+                body{
+            background-color: rgb(240, 240, 240);
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 300px;
+            padding: 20px 20px 40px 20px;
+            text-align: center;
+            margin: auto;
+            background-color: white;
+            margin-top: 40px;
+        }
+        input{
+            padding: 8px;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <form >
+            <h2>Enter OTP</h2>
+            <input id="otp" type="number" minlength="4" maxlength="4">
+            <input type="submit" value="Click to Make Payment">
+        </form>
+    </div>
+</body>
+</html>
+<script>
+        let form=document.querySelector("form");
+    form.addEventListener("submit",makPay);
+    function makPay(){
+        event.preventDefault();
+        let otp=document.querySelector("#otp");
+        if(otp.value==1234){
+            alert("Payment Successful");
+        } else{
+            alert("Enter The 4 Digit OTP! Hint:1234");
+        }
+       
+    }
+</script>

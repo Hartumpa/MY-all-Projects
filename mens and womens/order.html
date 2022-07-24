@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Order</title>
+    <style>
+                body{
+            background-color: rgb(240, 240, 240);
+            font-family: 'Poppins', sans-serif;
+        }
+        h2{
+            text-align: center;
+            margin: 40px auto ;
+      
+        }
+       form{
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            margin: auto;
+            font-size: 20px;
+            padding: 20px;
+            background-color: white;
+        }
+        input{
+            padding: 8px;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        #container>div>div{
+            width: 40%;
+            color: green;
+            margin: auto;
+            font-weight: 600;
+       
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h2>To pay by card, please fill out the fields below.</h2>
+        <div >
+           <div><p> Total Cart Value: &#8377 <span id="total"></span> </p></div>
+            <form >
+                Name on card:
+                <input id="name" type="text" placeholder="Enter Name">
+                Card Number:
+                <input id="cardNum" type="number" placeholder="Enter Card number">
+                expiration Date:
+                <input id="expDate" type="month" >
+                CVV: <input id="cvv" type="number" maxlength="3" minlength="3" placeholder="Enter Three digit CVV">
+                security code: <input id="sqCode" type="number" maxlength="4" minlength="4" placeholder="Enter four digit pin">
+                <input type="submit">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+<script src="order.js"></script>

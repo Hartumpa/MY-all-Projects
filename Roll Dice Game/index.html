@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Roll The Dice</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: linear-gradient(to right, #3f5efb, #e4fc46c1);
+      }
+      #dice {
+        display: flex;
+        width: 70%;
+        margin: auto;
+        justify-content: space-between;
+        align-items: center;
+      }
+      #roll {
+        margin: auto;
+        width: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 3em;
+      }
+      button {
+        padding: 1rem;
+        font-size: 2em;
+        color: white;
+        background: linear-gradient(green, yellow);
+        border-radius: 2em;
+      }
+      #winner {
+        margin: auto;
+        margin-top: 2em;
+        width: 40%;
+        border: 1px solid;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2em;
+        background: linear-gradient(red, blue);
+        border-radius: 2em;
+      }
+      img {
+        width: 50%;
+      }
+      #dice > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2em;
+      }
+      h1 {
+        color: white;
+        font-size: 2.5em;
+      }
+      h2{
+        color: rgb(0, 26, 255);
+        font-size: 2rem;
+        margin-top: 1.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="winner">
+      <h1>winner</h1>
+    </div>
+    <div id="dice">
+      <div id="member-1">
+        <h2>Member A</h2>
+        <img />
+      </div>
+      <div id="member-2">
+        <h2>Member B</h2>
+        <img />
+      </div>
+      <div id="member-3">
+        <h2>Member C</h2>
+        <img />
+      </div>
+    </div>
+    <div id="roll">
+      <button>ROLL THE DICE</button>
+    </div>
+  </body>
+</html>
+<script>
+  document.querySelector("button").addEventListener("click", roll);
+  function roll() {
+    setTimeout(function () {
+      let user1number = Math.floor(Math.random() * 6) + 1;
+      // console.log(user1number)
+      let user1image = "dice" + user1number + ".png";
+      // console.log(user1image);
+      document.querySelectorAll("img")[0].setAttribute("src", user1image);
+
+      let user2number = Math.floor(Math.random() * 6) + 1;
+      let user2image = "dice" + user2number + ".png";
+      document.querySelectorAll("img")[1].setAttribute("src", user2image);
+
+      let user3number = Math.floor(Math.random() * 6) + 1;
+      let user3image = "dice" + user3number + ".png";
+      document.querySelectorAll("img")[2].setAttribute("src", user3image);
+
+      if (user1number >= user2number && user1number >= user3number) {
+        document.querySelector("h1").innerHTML = "The Winner is Member A !";
+      } else if (user2number >= user1number && user2number >= user3number) {
+        document.querySelector("h1").innerHTML = "The Winner is Member B !";
+      } else if (user3number >= user1number && user3number >= user2number) {
+        document.querySelector("h1").innerHTML = "The Winner is Member C !";
+      } else if (user3number == user1number && user3number == user2number) {
+        document.querySelector("h1").innerHTML = "It is a Draw !";
+      }
+    }, 500);
+  }
+</script>

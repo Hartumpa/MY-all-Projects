@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mens Page</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        h1{
+            text-align: center;
+        }
+        #mens{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            grid-template-rows: auto;
+            gap: 20px 30px;
+            place-items: center;
+        }
+        img+h5{
+            line-height: 30px;
+        }
+        h5+h5{
+            line-height: 30px;
+        }
+        button{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mens Page</h1>
+    <div>
+        <div id="status">
+            <h3 id="signinstatus"></h3>
+            <h3 id="username"></h3>
+            <a href="mensCart.html">Cart</a>
+            <button id="signout">Sign Out</button>
+        </div>
+    </div>
+    <select id="sortNames">
+        <option value="">Sort By Name</option>
+        <option value="Ascending">Ascending</option>
+        <option value="Descending">Descending</option>
+      </select>
+  
+      <select id="sortPrice" onchange="priceSort()">
+        <option value="">Sort By Price</option>
+        <option value="Low to High">Low to High</option>
+        <option value="High to Low">High to Low</option>
+      </select>
+    <div id="mens"></div>
+</body>
+</html>
+
+<script src="mens.js"></script>
