@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Type Recorder</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <main>
+      <textarea class="text" cols="40" rows="10"> </textarea>
+      <button class="btn">
+        <i class="fa-solid fa-microphone"></i>
+      </button>
+    </main>
+  </body>
+</html>
+<script>
+    let btn=document.querySelector(".btn");
+    btn.addEventListener("click",(ea)=>{
+        btn.classList.add("fade");
+
+        let recognition= new webkitSpeechRecognition();
+        recognition.lang="en-GB";
+
+        recognition.addEventListener("result",(e)=>{
+            document.querySelector(".text").value=e.results[0][0].transcript;
+            btn.classList.remove("fade")
+        })
+        recognition.start();
+    });
+</script>
