@@ -1,0 +1,1 @@
+Translator App : https://630e1b223174f064de6e25dd--verdant-klepon-e45fb4.netlify.app/
